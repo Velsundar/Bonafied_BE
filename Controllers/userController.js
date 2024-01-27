@@ -6,14 +6,10 @@ const { MongooseError } = require('mongoose');
 exports.register = async (req, res) => {
     try {
         const { email } = req.body;
-        
-        // Check if email already exists
         const existingUser = await User.findOne({ email });
         if (existingUser) {
             return res.status(400).send('Email already exists');
         }
-
-        // Create user
         const user = await User.create(req.body);
         res.send('User registered successfully!');
     } catch (err) {
@@ -21,9 +17,6 @@ exports.register = async (req, res) => {
         res.status(400).send(`Registration failed: ${err.message}`);
     }
 };
-
-
-
 
 exports.login = async (req, res) => {
   try {
