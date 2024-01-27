@@ -1,32 +1,29 @@
 // Import required modules
 const express = require("express");
-const { MongoClient } = require("mongodb");
+const mongoose = require('mongoose');
 const cors = require("cors");
+const routes = require('./Routes/routes');
 
 // Create an Express application
 const app = express();
 app.use(cors());
+app.use(express.json());
+app.use('/api', routes);
 
-// Connect to MongoDB
-const uri = "mongodb+srv://sundaravel:1234@bonafied.eyhj5if.mongodb.net/";
-const client = new MongoClient(uri, {
+// Connect to MongoDB using mongoose
+const uri = "mongodb+srv://sundaravel:1234@bonafied.eyhj5if.mongodb.net/Bonafied";
+
+mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  connectTimeoutMS: 30000
+})
+.then(() => {
+  console.log("Connected to MongoDB");
+})
+.catch((error) => {
+  console.error("Error connecting to MongoDB:", error);
 });
-let db;
-
-async function connectToMongoDB() {
-  try {
-    await client.connect();
-    console.log("Connected to MongoDB");
-    db = client.db("Bonafied");
-  } catch (error) {
-    console.error("Error connecting to MongoDB:", error);
-    console.log("Connectdb", db);
-  }
-}
-
-connectToMongoDB();
 
 // Define routes and middleware here
 
