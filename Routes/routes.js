@@ -9,9 +9,11 @@ router.post('/register', userController.register);
 router.post('/login', userController.login);
 
 // Display user panel
-router.get('/user-panel', userController.userPanel);
+// router.get('/user-panel', userController.userPanel);
 
-// Display admin panel
-router.get('/admin-panel', userController.adminPanel);
+// // Display admin panel
+// router.get('/admin-panel', userController.adminPanel);
+//panel rendering
+    router.get('panel-render', userController.renderPanel);
 
 module.exports = router;
