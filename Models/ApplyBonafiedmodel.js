@@ -8,25 +8,25 @@ const BonafiedSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: true
+        required: true,
     },
     phoneNumber: {
         type: String,
         required: true
     },
-    Address:{
+    address:{
         type: String,
         required: true,
     },
-    District:{
+    district:{
         type: String,
         required: true,
     },
-    Country:{
+    country:{
         type: String,
         required: true,
     },
-    State:{
+    state:{
         type: String,
         required: true,
     }
