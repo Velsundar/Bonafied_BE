@@ -28,6 +28,7 @@ exports.create = async (req, res) => {
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
+};
   exports.delete = async (req, res) => {
     try {
       const bonafied = await Bonafied.findByIdAndDelete(req.params.id);
@@ -39,4 +40,3 @@ exports.create = async (req, res) => {
       res.status(500).json({ message: error.message });
     }
   };
-};
