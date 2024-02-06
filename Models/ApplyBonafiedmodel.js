@@ -6,30 +6,27 @@ const BonafiedSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    regNo:{
+        type: String,
+        required: true,
+    },
+    department:{
+        type: String,
+        required: true,
+    },
+    year: {
+        type: String,
+        required: true,
+    },
     email: {
         type: String,
         required: true,
+        unique: true,
     },
-    phoneNumber: {
-        type: String,
-        required: true
-    },
-    address:{
+    fatherName:{
         type: String,
         required: true,
     },
-    district:{
-        type: String,
-        required: true,
-    },
-    country:{
-        type: String,
-        required: true,
-    },
-    state:{
-        type: String,
-        required: true,
-    }
 });
 
 const User = mongoose.model('apply-bonafied', BonafiedSchema);

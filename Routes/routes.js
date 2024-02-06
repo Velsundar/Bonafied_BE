@@ -17,6 +17,7 @@ router.get('/bonafied/:id', bonafiedController.getById);
 
 // Route for creating a new Bonafied record
 router.post('/bonafied', bonafiedController.create);
+router.delete('/deleteBonafied',bonafiedController.delete)
 
 // Display user panel
 // router.get('/user-panel', userController.userPanel);
