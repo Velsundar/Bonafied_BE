@@ -27,6 +27,10 @@ const BonafiedSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    purpose:{
+        type: String,
+        required: true,
+    }
 });
 
 const User = mongoose.model('apply-bonafied', BonafiedSchema);
