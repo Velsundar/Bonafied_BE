@@ -17,7 +17,7 @@ exports.register = async (req, res) => {
       gender,
       role,
     } = req.body;
-    const userMode = mode || 'UG';
+    const userMode = mode || "UG";
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).send("Email already exists");
@@ -45,21 +45,21 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
   try {
-    const { email, password } = req.body;
-    const user = await User.findOne({ email });
+    const { roll_no, password } = req.body;
+    const user = await User.findOne({ roll_no });
     if (!user) {
-      return res.status(401).json({ message: "Invalid email or password" });
+      return res.status(401).json({ message: "Invalid roll_no or password" });
     }
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      return res.status(401).json({ message: "Invalid email or password" });
+      return res.status(401).json({ message: "Invalid roll_no or password" });
     }
     const token = jwt.sign(
-      { userId: user._id, email: user.email, role: user.role },
+      { userId: user._id, roll_no: user.roll_no, role: user.role },
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
-    res.json({ token, email: user.email, role: user.role  });
+    res.json({ token, roll_no: user.roll_no, role: user.role });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -78,4 +78,3 @@ exports.renderPanel = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
