@@ -2,15 +2,15 @@ const mongoose = require('mongoose');
 
 // Define the user schema
 const userSchema = new mongoose.Schema({
-    fullName: {
+    name:{
         type: String,
-        required: true
+        required: true,
     },
-    password: {
+    gender:{
         type: String,
-        required: true
+        required: true,
     },
-    registrationNumber: {
+    roll_no: {
         type: String,
         required: true
     },
@@ -27,7 +27,20 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    batch: {
+    password: {
+        type: String,
+        required: true
+    },
+    year: {
+        type: String,
+        required: true
+    },
+    mode: {
+        type: String,
+        enum: ['UG', 'PG'],
+        default: 'UG'
+    },
+    seat_type: {
         type: String,
         required: true
     },

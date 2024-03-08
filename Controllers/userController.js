@@ -5,28 +5,35 @@ const jwt = require("jsonwebtoken");
 exports.register = async (req, res) => {
   try {
     const {
-      fullName,
-      email,
+      mode,
       password,
-      registrationNumber,
+      year,
+      email,
       phoneNumber,
       department,
-      batch,
+      seat_type,
+      roll_no,
+      name,
+      gender,
       role,
     } = req.body;
+    const userMode = mode || 'UG';
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).send("Email already exists");
     }
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = await User.create({
-      fullName,
-      email,
+      mode: userMode,
       password: hashedPassword,
-      registrationNumber,
+      year,
+      email,
       phoneNumber,
       department,
-      batch,
+      seat_type,
+      roll_no,
+      name,
+      gender,
       role,
     });
     res.send("User registered successfully!");
@@ -72,23 +79,3 @@ exports.renderPanel = async (req, res) => {
   }
 };
 
-// exports.userPanel = async (req, res) => {
-//   try {
-//     if (!req.user) {
-//       return res.status(401).json({ message: "Unauthorized" });
-//     }
-//     res.render("user-panel");
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
-// exports.adminPanel = async (req, res) => {
-//   try {
-//     if (!req.user || req.user.role !== 'admin') {
-//       return res.status(401).json({ message: "Unauthorized" });
-//     }
-//     res.render("admin-panel");
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
