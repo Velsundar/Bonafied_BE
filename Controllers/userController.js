@@ -61,7 +61,25 @@ exports.login = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
-    res.json({ token, roll_no: user.roll_no, role: user.role });
+    res.status(200).json({ 
+      status: 'success',
+      message: "Login successful",
+      token, 
+      roll_no: user.roll_no, 
+      role: user.role,
+      data:{
+        name: user?.name,
+        gender: user?.gender,
+        email: user?.email,
+        Phone: user?.phoneNumber,
+        branch: user?.department,
+        fathername: user?.father_name,
+        year: user?.year,
+        mode: user?.mode,
+        seatType: user?.seat_type,
+      }
+    });
+
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
