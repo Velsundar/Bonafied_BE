@@ -31,6 +31,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    father_name: {
+        type: String,
+        required: true,
+    },
     year: {
         type: String,
         required: true
