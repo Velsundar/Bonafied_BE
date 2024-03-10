@@ -5,28 +5,37 @@ const jwt = require("jsonwebtoken");
 exports.register = async (req, res) => {
   try {
     const {
-      fullName,
-      email,
+      mode,
       password,
-      registrationNumber,
+      year,
+      email,
       phoneNumber,
       department,
-      batch,
+      seat_type,
+      roll_no,
+      father_name,
+      name,
+      gender,
       role,
     } = req.body;
+    const userMode = mode || "UG";
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).send("Email already exists");
     }
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = await User.create({
-      fullName,
-      email,
+      mode: userMode,
       password: hashedPassword,
-      registrationNumber,
+      year,
+      email,
       phoneNumber,
       department,
-      batch,
+      seat_type,
+      father_name,
+      roll_no,
+      name,
+      gender,
       role,
     });
     res.send("User registered successfully!");
@@ -38,21 +47,40 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
   try {
-    const { email, password } = req.body;
-    const user = await User.findOne({ email });
+    const { roll_no, password } = req.body;
+    const user = await User.findOne({ roll_no });
     if (!user) {
-      return res.status(401).json({ message: "Invalid email or password" });
+      return res.status(401).json({ message: "Invalid roll_no or password" });
     }
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      return res.status(401).json({ message: "Invalid email or password" });
+      return res.status(401).json({ message: "Invalid roll_no or password" });
     }
     const token = jwt.sign(
-      { userId: user._id, email: user.email, role: user.role },
+      { userId: user._id, roll_no: user.roll_no, role: user.role },
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
-    res.json({ token, email: user.email, role: user.role  });
+    res.status(200).json({ 
+      status: 'success',
+      message: "Login successful",
+      token, 
+      roll_no: user.roll_no, 
+      role: user.role,
+      data:{
+        name: user?.name,
+        gender: user?.gender,
+        email: user?.email,
+        Phone: user?.phoneNumber,
+        branch: user?.department,
+        fathername: user?.father_name,
+        year: user?.year,
+        mode: user?.mode,
+        seatType: user?.seat_type,
+        roll_no: user?.roll_no,
+      }
+    });
+
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -71,24 +99,3 @@ exports.renderPanel = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
-// exports.userPanel = async (req, res) => {
-//   try {
-//     if (!req.user) {
-//       return res.status(401).json({ message: "Unauthorized" });
-//     }
-//     res.render("user-panel");
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
-// exports.adminPanel = async (req, res) => {
-//   try {
-//     if (!req.user || req.user.role !== 'admin') {
-//       return res.status(401).json({ message: "Unauthorized" });
-//     }
-//     res.render("admin-panel");
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
