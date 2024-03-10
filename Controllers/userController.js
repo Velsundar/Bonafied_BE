@@ -77,6 +77,7 @@ exports.login = async (req, res) => {
         year: user?.year,
         mode: user?.mode,
         seatType: user?.seat_type,
+        roll_no: user?.roll_no,
       }
     });
 
