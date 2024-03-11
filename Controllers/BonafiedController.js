@@ -3,9 +3,9 @@ const Bonafied = require("../Models/ApplyBonafiedmodel");
 exports.getAll = async (req, res) => {
   try {
     const bonafiedList = await Bonafied.find();
-    res.status(200).json(bonafiedList);
+    res.status(200).json({ success: true, message:"successfully get all bonafied applications", data: bonafiedList });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ success: false, message: error.message });
   }
 };
 exports.getById = async (req, res) => {
