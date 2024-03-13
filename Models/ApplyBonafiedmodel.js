@@ -30,6 +30,10 @@ const BonafiedSchema = new mongoose.Schema({
     purpose:{
         type: String,
         required: true,
+    },
+    approval:{
+        type: Boolean,
+        default: false
     }
 });
 
