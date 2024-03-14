@@ -14,7 +14,8 @@ router.get('/bonafied', bonafiedController.getAll);
 
 // Route for getting Bonafied by ID
 router.get('/bonafied/:id', bonafiedController.getById);
-
+//update bonafied
+router.put('/updatebonafied/:id',bonafiedController.update);
 // Route for creating a new Bonafied record
 router.post('/bonafied', bonafiedController.create);
 router.delete('/deleteBonafied',bonafiedController.delete)

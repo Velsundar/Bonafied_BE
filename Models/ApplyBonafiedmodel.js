@@ -21,7 +21,6 @@ const BonafiedSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        unique: true,
     },
     fatherName:{
         type: String,
@@ -30,6 +29,10 @@ const BonafiedSchema = new mongoose.Schema({
     purpose:{
         type: String,
         required: true,
+    },
+    approval:{
+        type: Boolean,
+        default: false
     }
 });
 
