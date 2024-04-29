@@ -1,8 +1,8 @@
-const Bonafied = require("../Models/ApplyBonafiedmodel");
+const BonafiedApply = require("../Models/ApplyBonafiedmodel");
 
 exports.getAll = async (req, res) => {
   try {
-    const bonafiedList = await Bonafied.find();
+    const bonafiedList = await BonafiedApply.find();
     res.status(200).json({
       success: true,
       message: "successfully get all bonafied applications",
@@ -14,7 +14,7 @@ exports.getAll = async (req, res) => {
 };
 exports.getById = async (req, res) => {
   try {
-    const bonafied = await Bonafied.findById(req.params.id);
+    const bonafied = await BonafiedApply.findById(req.params.id);
     if (!bonafied) {
       return res.status(404).json({ message: "Requested data Not found" });
     }
@@ -25,7 +25,7 @@ exports.getById = async (req, res) => {
 };
 exports.update = async (req, res) => {
   try {
-    const updatedBonafied = await Bonafied.findByIdAndUpdate(
+    const updatedBonafied = await BonafiedApply.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true }
@@ -40,9 +40,10 @@ exports.update = async (req, res) => {
 };
 
 exports.create = async (req, res) => {
+console.log('working')
+console.log('req',req.body)
   try {
-    const newBonafied = new Bonafied(req.body);
-    await newBonafied.save();
+    const newBonafied = await BonafiedApply.create(req.body);
     res.status(201).json(newBonafied);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -50,7 +51,7 @@ exports.create = async (req, res) => {
 };
 exports.delete = async (req, res) => {
   try {
-    const bonafied = await Bonafied.findByIdAndDelete(req.params.id);
+    const bonafied = await BonafiedApply.findByIdAndDelete(req.params.id);
     if (!bonafied) {
       return res.status(404).json({ message: "Requested data Not found" });
     }
