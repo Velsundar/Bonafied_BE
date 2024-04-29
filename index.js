@@ -15,11 +15,7 @@ app.use('/api', routes);
 // Connect to MongoDB using mongoose
 const uri = "mongodb+srv://sundaravel:1234@bonafied.eyhj5if.mongodb.net/Bonafied";
 
-mongoose.connect(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  connectTimeoutMS: 30000
-})
+mongoose.connect(uri)
 .then(() => {
   console.log("Connected to MongoDB");
 })

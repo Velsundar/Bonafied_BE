@@ -36,6 +36,6 @@ const BonafiedSchema = new mongoose.Schema({
     }
 });
 
-const User = mongoose.model('apply-bonafied', BonafiedSchema);
+const BonafiedApply = mongoose.model('apply-bonafied', BonafiedSchema);
 
-module.exports = User;
+module.exports = BonafiedApply;
