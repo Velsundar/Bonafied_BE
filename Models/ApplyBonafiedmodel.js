@@ -33,6 +33,10 @@ const BonafiedSchema = new mongoose.Schema({
     approval:{
         type: Boolean,
         default: false
+    },
+    seatType:{
+        type:String,
+        required:true,
     }
 });
 
